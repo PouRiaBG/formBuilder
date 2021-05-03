@@ -1,19 +1,20 @@
 import React from 'react';
 import {StyleSheet} from 'react-native'
-import {Text, Layout} from '@ui-kitten/components'
+import {Button, Text, Layout} from '@ui-kitten/components'
 import FieldRenderer from './FieldRenderer';
+import {useForm, } from 'react-hook-form'
 
 const FormBuilder = ({schema})=>{
+    //Hook form !
+    const { control, handleSubmit, formState: { errors } } = useForm();
+    const onSubmit = data => console.log(JSON.stringify(data));
     const keys = Object.keys(schema)
-    const values = Object.values(schema)
+    
     const {title = 'undefined', description = 'undefined'} = schema
     let propKey;
     if(schema.type === 'object' && keys.includes('properties')){
         propKey = Object.keys(schema.properties)
     }
-
-    console.log(keys, values)
-
 
     return (
         <Layout style={styles.container}>
@@ -24,17 +25,30 @@ const FormBuilder = ({schema})=>{
             <Layout style={styles.form} level='3'>
                 {
                     propKey.map(item => (
-                       <FieldRenderer 
+                       <FieldRenderer
+                        propKey={item}
+                        requirmentField={schema.required}
+                        errors={errors}
+                        control={control}
+                        key={schema.properties[item].title}
                         type={schema.properties[item].type}
-                        title={schema.properties[item].title}
+                        name={schema.properties[item].title}
                        />
                     ))
                 }
-               
+               <Button 
+               disabled={false}
+               style={styles.btn}
+               status="success"
+               size="large"
+               appearance="outline"
+               onPress={handleSubmit(onSubmit)}
+               >Register</Button>
             </Layout>
         </Layout>
     )
 }
+
 
 const styles = StyleSheet.create({
     container : {
@@ -53,7 +67,11 @@ const styles = StyleSheet.create({
         width : '100%',
         flex : 0.8,
         flexDirection : 'column',
-        justifyContent : 'center'
+        justifyContent : 'space-evenly'
+    },
+    btn :{
+        padding : 0,
+        margin : 30, 
     }
 })
 

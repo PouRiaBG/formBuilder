@@ -1,5 +1,5 @@
 import React from 'react';
-import {Input, Text } from '@ui-kitten/components'
+import {Text } from '@ui-kitten/components'
 import TextFeild from '../templates/TextFeild';
 
 const FieldRenderer = ({type, ...props})=>{
