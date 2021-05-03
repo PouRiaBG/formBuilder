@@ -1,11 +1,11 @@
 import React from 'react';
-import {Text, Layout} from '@ui-kitten/components'
+import FormBuilder from '../components/FormBuilder'
+import {useSchema} from '../hooks/useSchema'
 
 function Home (){
+    const {schema} = useSchema()
     return (
-        <Layout style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-            <Text category='h2'>Pouria</Text>
-        </Layout>
+        <FormBuilder schema={schema} />
     )
 }
 export default Home
