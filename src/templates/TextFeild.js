@@ -1,6 +1,6 @@
 import React from 'react'
-import {Input, Text} from '@ui-kitten/components'
-import {StyleSheet, View} from 'react-native'
+import {Input, Layout, Text} from '@ui-kitten/components'
+import {StyleSheet} from 'react-native'
 import {Controller } from "react-hook-form";
 
 function TextFeild(props){
@@ -8,7 +8,7 @@ function TextFeild(props){
     const {name, control, errors, requirmentField, propKey} = props
     let isRequired = requirmentField.includes(propKey) ? true : false
     return (
-        <View style={styles.inputContainer}>
+        <Layout style={styles.fieldContainer}>
             <Text 
                 category="h6"
                 status="basic">
@@ -24,33 +24,29 @@ function TextFeild(props){
                 onBlur={onBlur}
                 status="basic"
                 placeholder={name}
-                style={styles.input}/>
+                />
             )}
             rules={{ required: isRequired }}
             name={name}
             />
             {errors[name] &&
              <Text 
-                category="s1"
+                category="c1"
                 status="danger">
                Dude !! your {name} can not be empty.
              </Text>}
-        </View>
+        </Layout>
     )
 }
 
 
 const styles = StyleSheet.create({
-   inputContainer : {
-        display : 'flex',
+   fieldContainer : {
         flexDirection : 'column',
+        flex : 0.3,
         justifyContent : 'space-between',
         padding : 30,
         margin : 2, 
-        flex : 0.3
-    },
-   input : {
-       
-   }
+    }
 })
 export default TextFeild
