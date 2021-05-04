@@ -1,6 +1,7 @@
 import React from 'react';
 import {Text } from '@ui-kitten/components'
 import TextFeild from '../templates/TextFeild';
+import NumberField from '../templates/NumberField'
 
 const FieldRenderer = ({type, ...props})=>{
         switch(type){
@@ -8,7 +9,7 @@ const FieldRenderer = ({type, ...props})=>{
                 return <TextFeild {...props} />
             }
             case 'number' : {
-                return <Text>Number</Text>
+                return <NumberField {...props}  />
             }
             default : {
                 return <Text>Error</Text>
