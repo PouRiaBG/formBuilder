@@ -1,6 +1,6 @@
 {
   "title": "Registration form",
-  "description": "A simple form example.",
+  "description": "Built with Json schema!",
   "type": "object",
   "properties": {
     "firstName": {
@@ -11,10 +11,15 @@
     "lastName": {
       "type": "string",
       "title": "Last name"
+    },
+    "age" : {
+      "type" : "number",
+      "title": "Age"
     }
   },
   "required": [
     "firstName",
-    "lastName"
+    "lastName",
+    "age"
   ]
 }
