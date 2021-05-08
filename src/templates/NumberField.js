@@ -4,15 +4,16 @@ import { Layout, Text, Input } from '@ui-kitten/components'
 import {Controller} from 'react-hook-form'
 
 function NumberField(props){
-    const {errors, name, control, requirmentField, propKey} = props
+    const {errors, name, control, requirmentField, propKey, maxLength} = props
     const isRequired = requirmentField.includes(propKey) ? true : false
+    console.log(errors)
     return (
         <Layout style={styles.fieldContainer}>
             <Layout style={styles.subContainer}>
                 <Text 
                 category="h6"
                 status="basic"
-                style={styles.input}
+                style={styles.text}
                 >
                 {name} 
                 </Text>
@@ -20,6 +21,7 @@ function NumberField(props){
                 control={control}
                 render={({field : {onChange, onBlur, value}})=> (
                     <Input 
+                        style={styles.input}
                         keyboardType="numeric"
                         placeholder={name}
                         value={value}
@@ -29,16 +31,25 @@ function NumberField(props){
                     />
                 )}
                 name={name}
-                rules={{required : isRequired}}
+                rules={{required : isRequired, maxLength : maxLength}}
                 />
             </Layout>
           
             {errors[name] && 
-                <Text
-                category="c1" 
-                status="danger">
-                    Dude! your {name} can not be empty
-                </Text>
+                errors[name].type === 'maxLength' &&
+                    <Text
+                    category="c1" 
+                    status="danger">
+                        Your {name} can not be more than 99 year!
+                    </Text>
+            }
+            {errors[name] && 
+                errors[name].type === 'required' &&
+                    <Text
+                    category="c1" 
+                    status="danger">
+                        Your {name} can not be empty :)
+                    </Text>
             }
         </Layout>
     )
@@ -56,8 +67,11 @@ const styles = StyleSheet.create({
         flexDirection : 'row',
         justifyContent : 'flex-start'
     },
-    input : {
+    text : {
         marginRight : 10
+    },
+    input : {
+        flexBasis : 100
     }
 })
 

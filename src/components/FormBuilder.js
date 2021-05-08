@@ -10,7 +10,9 @@ const FormBuilder = ({schema})=>{
     const onSubmit = data => console.log(JSON.stringify(data));
     const keys = Object.keys(schema)
     
-    const {title = 'undefined', description = 'undefined'} = schema
+    const {
+        title = 'undefined',
+        description = 'undefined'} = schema
     let propKey;
     if(schema.type === 'object' && keys.includes('properties')){
         propKey = Object.keys(schema.properties)
@@ -33,6 +35,8 @@ const FormBuilder = ({schema})=>{
                         key={schema.properties[item].title}
                         type={schema.properties[item].type}
                         name={schema.properties[item].title}
+                        list={schema.properties[item].enum && schema.properties[item].enum}
+                        maxLength={schema.properties[item].maxLength && schema.properties[item].maxLength}
                        />
                     ))
                 }

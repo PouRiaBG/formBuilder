@@ -8,13 +8,19 @@
       "title": "First name",
       "default": "Chuck"
     },
-    "lastName": {
-      "type": "string",
-      "title": "Last name"
+    "list" : {
+      "type" : "array",
+      "title": "City",
+      "enum": [
+        "Tehran",
+        "Mashhad",
+        "Shiraz"
+      ]
     },
     "age" : {
       "type" : "number",
-      "title": "Age"
+      "title": "Age",
+      "maxLength": 2
     }
   },
   "required": [
